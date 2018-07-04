@@ -45,6 +45,10 @@ public class CauB extends BaseApplication {
         for (String s : formattedData) {
             System.out.println(s);
         }
+        List<String> combinedData = new ArrayList<>();
+        combinedData.addAll(formattedLines);
+        combinedData.addAll(formattedData);
+        writeFileOutput("heart-integration-auto.arff", combinedData);
     }
 
     private static boolean isContainsComponents(String src, String[] components) {
