@@ -8,17 +8,12 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 
-public class CauC {
+public class CauC extends BaseApplication {
 
     public static File getFileFromInput() {
-        URL fileName = null;
-        fileName = CauC.class.getResource("/resources/heart-integration.arff");
-        if (fileName != null) {
-            try {
-                return new File(fileName.toURI());
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
+        File file = new File("heart-integration-auto.arff");
+        if (file.exists()) {
+            return file;
         }
         return null;
     }
@@ -132,6 +127,28 @@ public class CauC {
             }
         }
         return count;
+    }
+
+    public static void cleanupFiles() {
+        File file = getFileFromInput();
+        List<Attribute> attributes = createHashFromListAttributes(file);
+        List<String> data = getAllData(file);
+        List<String> header = extractHeader(file);
+
+        data = replaceMissingValues(data, attributes);
+        List<String> combined = combinedFile(header, data);
+        writeFileOutput("heart-cleaned-auto.arff", combined);
+    }
+
+    private static List<String> extractHeader(File file) {
+        return readAttribute(file);
+    }
+
+    private static List<String> combinedFile(List<String> header, List<String> data) {
+        List<String> combined = new ArrayList<>();
+        combined.addAll(header);
+        combined.addAll(data);
+        return combined;
     }
 
     public static List<String> replaceMissingValues(List<String> lines, List<Attribute> map) {

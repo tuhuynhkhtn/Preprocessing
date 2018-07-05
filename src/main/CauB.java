@@ -96,13 +96,11 @@ public class CauB extends BaseApplication {
         for (int i = 1; i < attrSrc.size(); i++) {
             String lineSrc = attrSrc.get(i);
             String lineCop = attrCop.get(i);
-            if (lineSrc.equals(lineCop)) {
+            if (lineSrc.equals(lineCop) && lineSrc.contains("real")) {
                 lineSrc = lineSrc.replace("'", "");
-                if (lineSrc.contains("real")) {
-                    int index = lineSrc.indexOf("real");
-                    lineSrc = lineSrc.substring(0, index);
-                    lineSrc += "numeric";
-                }
+                int index = lineSrc.indexOf("real");
+                lineSrc = lineSrc.substring(0, index);
+                lineSrc += "numeric";
                 formatedLines.add(lineSrc);
             } else {
                 Matcher matcherSrc = Pattern.compile("\\{(.*?)\\}").matcher(lineSrc);
@@ -112,6 +110,9 @@ public class CauB extends BaseApplication {
                     String strWithinCurlyBracketSrc = matcherSrc.group(0);
                     String strWithinCurlyBracketCop = matcherCop.group(0);
 
+                    String removedSpaceStrSrc = strWithinCurlyBracketSrc.replace(" ", "");
+                    removedSpaceStrSrc = removedSpaceStrSrc.replace("'", "");
+
                     String[] components = strWithinCurlyBracketCop.split(",");
 
                     if (!strWithinCurlyBracketCop.equals(strWithinCurlyBracketSrc)
@@ -120,11 +121,15 @@ public class CauB extends BaseApplication {
                         return null;
                     } else {
                         lineSrc = lineSrc.replace("'", "");
+                        strWithinCurlyBracketSrc = strWithinCurlyBracketSrc.replace("'", "");
+                        lineSrc = lineSrc.replace(strWithinCurlyBracketSrc, removedSpaceStrSrc);
                         formatedLines.add(lineSrc);
                     }
                 }
             }
         }
+        String data = "@data";
+        formatedLines.add(data);
         return formatedLines;
     }
 
