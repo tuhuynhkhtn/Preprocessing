@@ -99,7 +99,7 @@ public class CauD extends BaseApplication {
         writeFileOutput("heart-normal-auto.arff", combinedResult);
     }
 
-    private static List<String> combinedFile(List<String> header, List<String> data) {
+    public static List<String> combinedFile(List<String> header, List<String> data) {
         List<String> combined = new ArrayList<>();
         combined.addAll(header);
         combined.addAll(data);
