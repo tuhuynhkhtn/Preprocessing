@@ -14,8 +14,9 @@ public class MainApplication {
     public static void main(String[] args) {
         //CauA.timKiemChiMuc();
         /*List<File> files = CauB.getFiles();
-        CauB.combineFiles(files.get(0), files.get(1));*/
-        CauC.cleanupFiles();
+        CauB.combineFiles(files.get(1), files.get(0));*/
+        //CauC.cleanupFiles();
+        CauD.standardlized();
     }
 
 }
