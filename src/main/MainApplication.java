@@ -1,14 +1,5 @@
 package main;
 
-import java.io.File;
-import java.util.List;
-
-import model.Attribute;
-
-import java.io.File;
-import java.util.List;
-import java.util.Scanner;
-
 public class MainApplication {
 
     public static void main(String[] args) {
@@ -16,7 +7,9 @@ public class MainApplication {
         /*List<File> files = CauB.getFiles();
         CauB.combineFiles(files.get(1), files.get(0));*/
         //CauC.cleanupFiles();
-        CauD.standardlized();
+        //CauD.standardlized();
+        
+    	System.out.println(CauE.SimpleRandSampleWithoutReplacement(0.5F));
     }
 
 }

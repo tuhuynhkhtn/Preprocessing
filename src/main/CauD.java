@@ -1,7 +1,6 @@
 package main;
 
 import model.Attribute;
-import org.w3c.dom.Attr;
 import utils.Utils;
 
 import java.io.File;

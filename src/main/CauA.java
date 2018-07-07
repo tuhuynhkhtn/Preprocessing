@@ -9,7 +9,8 @@ import java.util.Scanner;
 
 public class CauA {
 
-    public static void timKiemChiMuc() {
+    @SuppressWarnings("resource")
+	public static void timKiemChiMuc() {
         System.out.println("1. heart-c.arff \t 2. heart-h.arff");
         Scanner scanner = new Scanner(System.in);
         int value = scanner.nextInt();
