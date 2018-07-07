@@ -33,19 +33,19 @@ public class CauE {
 		return report;
 	}
 	
-	private static List<String> getDataSRSOWR(List<String> data) {
+	private static List<String> getDataSRSOWR(List<String> data,Float percent) {
         List<Integer> list_rand=randList(data.size());
         
         List<String> get=new ArrayList<>();
         
-        for (Integer i = 0; i < data.size()/2; i++) {
+        for (Integer i = 0; i < data.size()*(percent>=1?1:percent); i++) {
 			get.add(data.get(indexList(i, list_rand)));
 		}
         
 		return get;
 	}
 	
-	public static boolean SimpleRandSampleWithoutReplacement() {
+	public static boolean SimpleRandSampleWithoutReplacement(Float percent) {
 		try {
 			File file = getFileFromInput();
 			if(file == null) return false;
@@ -53,7 +53,7 @@ public class CauE {
 	        List<String> data = CauD.readData(file);
 	        List<String> headers = CauD.readAttribute(file);
 	        
-	        List<String> result = getDataSRSOWR(data); 
+	        List<String> result = getDataSRSOWR(data,percent); 
 	        
 	        //System.out.println(data.size()+"..."+result.size());
 	        
@@ -71,7 +71,7 @@ public class CauE {
 	 * chua tim duoc thuat toan nen se lay thuat toan tu Simple Rand Sample Without Replacemen 
 	 * @return ket qua chuong trinh, neu co loi chuong trinh tra ve false
 	 */
-	public static boolean SimpleRandSampleWithReplacement() {
+	public static boolean SimpleRandSampleWithReplacement(Float percent) {
 		try {
 			File file = getFileFromInput();
 			if(file == null) return false;
@@ -80,7 +80,7 @@ public class CauE {
 	        List<String> headers = CauD.readAttribute(file);
 	        
 	        //List<String> result = CauD.standardlizedAllAtrributes(data, attributes);
-	        List<String> result = getDataSRSOWR(data); 
+	        List<String> result = getDataSRSOWR(data, percent); 
 	        List<String> combinedResult = CauD.combinedFile(headers, result);
 	        BaseApplication.writeFileOutput("heart-srsowr.arff", combinedResult);
 			
