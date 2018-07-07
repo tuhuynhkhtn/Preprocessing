@@ -1,6 +1,7 @@
 package main;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -13,18 +14,17 @@ public class CauE {
         return null;
     }
 	
-	@SuppressWarnings("null")
 	private static List<Integer> randList(int size) {
-		List<Integer> list = null;
+		List<Integer> list=new ArrayList<Integer>();
 		Random rd=new Random();
 		for (int i = 0; i < size; i++) {
-			list.add(rd.nextInt());
+			list.add(Integer.valueOf((rd.nextInt())));
 		}
 		return list;
 	}
 	
 	private static int indexList(Integer index,List<Integer> list) {
-		int report = 1;
+		int report = 0;
 		
 		for (int i = 0; i < list.size(); i++) {
 			if(list.get(index) > list.get(i)) report++;
@@ -33,21 +33,19 @@ public class CauE {
 		return report;
 	}
 	
-	@SuppressWarnings("null")
 	private static List<String> getDataSRSOWR(List<String> data) {
         List<Integer> list_rand=randList(data.size());
         
-        List<String> get=null;
+        List<String> get=new ArrayList<>();
         
-        for (Integer i = 0; i < list_rand.size(); i++) {
+        for (Integer i = 0; i < data.size()/2; i++) {
 			get.add(data.get(indexList(i, list_rand)));
 		}
         
 		return get;
 	}
 	
-	@SuppressWarnings("unused")
-	private static boolean SimpleRandSampleWithoutReplacement() {
+	public static boolean SimpleRandSampleWithoutReplacement() {
 		try {
 			File file = getFileFromInput();
 			if(file == null) return false;
@@ -56,6 +54,8 @@ public class CauE {
 	        List<String> headers = CauD.readAttribute(file);
 	        
 	        List<String> result = getDataSRSOWR(data); 
+	        
+	        //System.out.println(data.size()+"..."+result.size());
 	        
 	        List<String> combinedResult = CauD.combinedFile(headers, result);
 	        BaseApplication.writeFileOutput("heart-srsowr.arff", combinedResult);
@@ -67,6 +67,10 @@ public class CauE {
 		return false;
 	}
 	
+	/**
+	 * chua tim duoc thuat toan nen se lay thuat toan tu Simple Rand Sample Without Replacemen 
+	 * @return ket qua chuong trinh, neu co loi chuong trinh tra ve false
+	 */
 	public static boolean SimpleRandSampleWithReplacement() {
 		try {
 			File file = getFileFromInput();
