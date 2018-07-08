@@ -17,10 +17,10 @@ public class CauB extends BaseApplication {
         try {
             File heartC = new File(fileHeartC.toURI());
             File heartH = new File(fileHeartH.toURI());
-            if (heartC.exists() && heartH.exists()) {
+            if (heartC.exists())
                 files.add(heartC);
+            if(heartH.exists())
                 files.add(heartH);
-            }
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
