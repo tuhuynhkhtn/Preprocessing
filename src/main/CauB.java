@@ -36,13 +36,6 @@ public class CauB extends BaseApplication {
         List<String> dataCop = readData(fileCop);
         List<String> formattedData = combineData(dataSrc, dataCop);
         if (formattedLines == null) return;
-        for (String s : formattedLines) {
-            System.out.println(s);
-        }
-        System.out.println();
-        for (String s : formattedData) {
-            System.out.println(s);
-        }
         List<String> combinedData = new ArrayList<>();
         combinedData.addAll(formattedLines);
         combinedData.addAll(formattedData);
